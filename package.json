@@ -1,0 +1,119 @@
+{
+  "name": "soos-sca-scan",
+  "displayName": "SOOS Sca Scan",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "SOOS SCA",
+      "properties": {
+        "soos-sca-scan.clientId": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "SOOS Client ID - get yours from https://app.soos.io/integrate/sca"
+        },
+        "soos-sca-scan.apiKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "SOOS API Key - get yours from https://app.soos.io/integrate/sca"
+        },
+        "soos-sca-scan.projectName": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Project Name - this is what will be displayed in the SOOS app."
+        },
+        "soos-sca-scan.apiURL": {
+          "type": "string",
+          "default": "https://api.soos.io/api/",
+          "markdownDescription": "SOOS API URL - Intended for internal use only, do not modify."
+        },
+        "soos-sca-scan.directoriesToExclude": {
+          "type": "string",
+          "markdownDescription": "Listing of directories or patterns to exclude from the search for manifest files. eg: **bin/start/**, **/start/**"
+        },
+        "soos-sca-scan.filesToExclude": {
+          "type": "string",
+          "markdownDescription": "Listing of files or patterns patterns to exclude from the search for manifest files. eg: **/req**.txt/, **/requirements.txt"
+        },
+        "soos-sca-scan.packageManagers": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string",
+            "enum": [
+              "CFamily",
+              "Dart",
+              "Erlang",
+              "Go",
+              "Homebrew",
+              "Java",
+              "NPM",
+              "NuGet",
+              "Php",
+              "Python",
+              "Ruby",
+              "Rust"
+            ]
+          },
+          "uniqueItems": true,
+          "markdownDescription": "Select package managers to include when searching for manifest files. If none are selected, all package managers will be included."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "soos-sca-scan.scan",
+        "title": "Run SOOS SCA Scan"
+      },
+      {
+        "command": "soos-sca-scan.configure",
+        "title": "Configure SOOS SCA Scan"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "soos-sca-scan.scan",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test",
+    "link:soos-api-client": "npm link @soos-io/api-client && npm run build && npm link",
+    "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@types/argparse": "^2.0.14",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@soos-io/api-client": "^0.2.35",
+    "@soos-io/soos-sca": "^2.0.21",
+    "argparse": "^2.0.1",
+    "glob": "^10.3.10"
+  }
+}
