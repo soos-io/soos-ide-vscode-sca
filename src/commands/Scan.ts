@@ -13,7 +13,7 @@ import { version } from "../../package.json";
 
 export function registerScanCommand() {
   return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri) => {
-    const config = parseConfig();
+    const config = await parseConfig();
     if (!config) {
       return;
     }
@@ -47,15 +47,15 @@ export function registerScanCommand() {
           const result = await analysisService.setupScan({
             clientId: config.clientId,
             projectName: config.projectName,
-            branchName: "main",
-            commitHash: "",
-            buildVersion: "",
-            buildUri: "",
-            branchUri: "",
+            branchName: config.branchName ?? "",
+            commitHash: config.commitHash,
+            buildVersion: null,
+            buildUri: null,
+            branchUri: null,
             operatingEnvironment: "",
             integrationName: IntegrationName.SoosSca,
             integrationType: IntegrationType.IDE,
-            appVersion: "",
+            appVersion: null,
             scriptVersion: version,
             contributingDeveloperAudit: [],
             scanType: ScanType.SCA,
@@ -76,8 +76,8 @@ export function registerScanCommand() {
           const manifestFiles = await analysisService.searchManifestFiles({
             clientId: config.clientId,
             projectHash,
-            filesToExclude: [],
-            directoriesToExclude: [],
+            filesToExclude: config.filesToExclude,
+            directoriesToExclude: config.directoriesToExclude,
             sourceCodePath: sourceCodePath,
           });
 

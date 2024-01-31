@@ -36,11 +36,17 @@
           "markdownDescription": "SOOS API URL - Intended for internal use only, do not modify."
         },
         "soos-sca-scan.directoriesToExclude": {
-          "type": "string",
-          "markdownDescription": "Listing of directories or patterns to exclude from the search for manifest files. eg: **bin/start/**, **/start/**"
+          "type": "array",
+          "markdownDescription": "Listing of directories or patterns to exclude from the search for manifest files. eg: **bin/start/**, **/start/**",
+          "default": [
+            "**/node_modules/**",
+            "**/bin/**",
+            "**/obj/**",
+            "**/lib/**"
+          ]
         },
         "soos-sca-scan.filesToExclude": {
-          "type": "string",
+          "type": "array",
           "markdownDescription": "Listing of files or patterns patterns to exclude from the search for manifest files. eg: **/req**.txt/, **/requirements.txt"
         },
         "soos-sca-scan.packageManagers": {
