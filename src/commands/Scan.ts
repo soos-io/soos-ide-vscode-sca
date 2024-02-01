@@ -59,7 +59,7 @@ export function registerScanCommand(secretStorage: SecretStorage) {
             buildUri: null,
             branchUri: null,
             operatingEnvironment: "",
-            integrationName: IntegrationName.SoosSca,
+            integrationName: IntegrationName.VisualStudioCode,
             integrationType: IntegrationType.IDE,
             appVersion: null,
             scriptVersion: version,
