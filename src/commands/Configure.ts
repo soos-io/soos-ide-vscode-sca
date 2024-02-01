@@ -1,4 +1,4 @@
-import { commands, extensions, window, workspace } from "vscode";
+import { SecretStorage, commands, extensions, window, workspace } from "vscode";
 import { GitExtension } from "../git";
 import { ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
 
@@ -9,19 +9,25 @@ export interface IAnalysisArguments {
   apiURL: string;
   directoriesToExclude: string[];
   filesToExclude: string[];
-  packageManagers?: string[];
+  packageManagers: string[];
   branchName: string | null;
   commitHash: string | null;
 }
 
-export async function parseConfig(): Promise<IAnalysisArguments | null> {
+export async function parseConfig(
+  secretStorage: SecretStorage
+): Promise<IAnalysisArguments | null> {
   try {
     const config = workspace.getConfiguration("soos-sca-scan");
     const clientId = ensureNonEmptyValue(
-      config.get<string>("clientId"),
+      await secretStorage.get("soos.clientId"),
       "clientId"
     );
-    const apiKey = ensureNonEmptyValue(config.get<string>("apiKey"), "apiKey");
+    const apiKey = ensureNonEmptyValue(
+      await secretStorage.get("soos.apiKey"),
+      "apiKey"
+    );
+
     const projectName = ensureNonEmptyValue(
       config.get<string>("projectName"),
       "projectName"
@@ -45,9 +51,20 @@ export async function parseConfig(): Promise<IAnalysisArguments | null> {
       commitHash,
     };
   } catch (error) {
-    window.showErrorMessage(
-      `Please configure the extension first. [Configure](command:soos-sca-scan.configure)`
-    );
+    if (error instanceof Error) {
+      error.message.includes("apiKey") || error.message.includes("clientId")
+        ? window.showErrorMessage(
+            `Please configure the extension secrets first. [Configure](command:soos-sca-scan.configureSecrets)`
+          )
+        : window.showErrorMessage(
+            `Please configure the extension first. [Configure](command:soos-sca-scan.configure) 
+            ${error.message}`
+          );
+    } else {
+      window.showErrorMessage(
+        `Error getting the extension configuration, make sure all configuration is set. [Configure](command:soos-sca-scan.configure)`
+      );
+    }
   }
   return null;
 }

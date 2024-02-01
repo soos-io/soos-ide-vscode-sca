@@ -15,21 +15,6 @@
     "configuration": {
       "title": "SOOS SCA",
       "properties": {
-        "soos-sca-scan.clientId": {
-          "type": "string",
-          "default": "",
-          "markdownDescription": "SOOS Client ID - get yours from https://app.soos.io/integrate/sca"
-        },
-        "soos-sca-scan.apiKey": {
-          "type": "string",
-          "default": "",
-          "markdownDescription": "SOOS API Key - get yours from https://app.soos.io/integrate/sca"
-        },
-        "soos-sca-scan.projectName": {
-          "type": "string",
-          "default": "",
-          "markdownDescription": "Project Name - this is what will be displayed in the SOOS app."
-        },
         "soos-sca-scan.apiURL": {
           "type": "string",
           "default": "https://api.soos.io/api/",
@@ -71,6 +56,11 @@
           },
           "uniqueItems": true,
           "markdownDescription": "Select package managers to include when searching for manifest files. If none are selected, all package managers will be included."
+        },
+        "soos-sca-scan.projectName": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Project Name - this is what will be displayed in the SOOS app."
         }
       }
     },
@@ -82,6 +72,14 @@
       {
         "command": "soos-sca-scan.configure",
         "title": "Configure SOOS SCA Scan"
+      },
+      {
+        "command": "soos-sca-scan.configureSecrets",
+        "title": "Configure SOOS SCA Secrets"
+      },
+      {
+        "command": "soos-sca-scan.clearSecrets",
+        "title": "Clear SOOS SCA Secrets"
       }
     ],
     "menus": {
@@ -89,7 +87,7 @@
         {
           "when": "explorerResourceIsFolder",
           "command": "soos-sca-scan.scan",
-          "group": "navigation"
+          "group": "SOOS"
         }
       ]
     }

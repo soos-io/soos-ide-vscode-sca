@@ -6,14 +6,20 @@ import {
   soosLogger,
 } from "@soos-io/api-client";
 import AnalysisService from "@soos-io/api-client/dist/services/AnalysisService";
-import { commands, Uri, workspace, window, ProgressLocation } from "vscode";
-import { exit } from "process";
+import {
+  commands,
+  Uri,
+  workspace,
+  window,
+  ProgressLocation,
+  SecretStorage,
+} from "vscode";
 import { parseConfig } from "./Configure";
 import { version } from "../../package.json";
 
-export function registerScanCommand() {
+export function registerScanCommand(secretStorage: SecretStorage) {
   return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri) => {
-    const config = await parseConfig();
+    const config = await parseConfig(secretStorage);
     if (!config) {
       return;
     }
@@ -79,6 +85,7 @@ export function registerScanCommand() {
             filesToExclude: config.filesToExclude,
             directoriesToExclude: config.directoriesToExclude,
             sourceCodePath: sourceCodePath,
+            packageManagers: config.packageManagers,
           });
 
           if (manifestFiles.length === 0) {
@@ -94,7 +101,6 @@ export function registerScanCommand() {
               message: errorMessage,
               scanStatusUrl: result.scanStatusUrl,
             });
-            exit(1);
           }
 
           const allUploadsFailed = await analysisService.addManifestFilesToScan(
@@ -118,7 +124,6 @@ export function registerScanCommand() {
               message: `Error uploading manifests.`,
               scanStatusUrl: result.scanStatusUrl,
             });
-            exit(1);
           }
           progress.report({ increment: 25, message: "Starting Scan..." });
 
