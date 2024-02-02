@@ -76,6 +76,7 @@ export async function getCurrentBranchAndCommit(): Promise<{
   const notFound = { branchName: null, commitHash: null };
   const gitExtension = extensions.getExtension<GitExtension>("vscode.git");
   if (!gitExtension || !gitExtension.isActive) {
+    window.showWarningMessage("Git extension not found or inactive.");
     return notFound;
   }
 
