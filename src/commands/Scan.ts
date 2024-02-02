@@ -3,7 +3,6 @@ import {
   IntegrationType,
   ScanStatus,
   ScanType,
-  soosLogger,
 } from "@soos-io/api-client";
 import AnalysisService from "@soos-io/api-client/dist/services/AnalysisService";
 import {
@@ -17,12 +16,14 @@ import {
 import { parseConfig } from "./Configure";
 import { version } from "../../package.json";
 
-export function registerScanCommand(secretStorage: SecretStorage) {
+const registerScanCommand = (secretStorage: SecretStorage) => {
   return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri) => {
     const config = await parseConfig(secretStorage);
     if (!config) {
       return;
     }
+
+    const scanType = ScanType.SCA;
 
     const sourceCodePath =
       uri?.fsPath ?? workspace.workspaceFolders?.[0]?.uri.fsPath;
@@ -33,10 +34,7 @@ export function registerScanCommand(secretStorage: SecretStorage) {
         title: "SOOS SCA Scan",
         cancellable: true,
       },
-      async (progress, token) => {
-        token.onCancellationRequested(() => {
-          console.log("User canceled the long running operation");
-        });
+      async (progress) => {
         progress.report({ increment: 0, message: "Initializing scan..." });
         try {
           const analysisService = AnalysisService.create(
@@ -64,15 +62,13 @@ export function registerScanCommand(secretStorage: SecretStorage) {
             appVersion: null,
             scriptVersion: version,
             contributingDeveloperAudit: [],
-            scanType: ScanType.SCA,
+            scanType,
           });
 
           projectHash = result.projectHash;
           branchHash = result.branchHash;
           analysisId = result.analysisId;
           scanStatusUrl = result.scanStatusUrl;
-
-          soosLogger.logLineSeparator();
 
           progress.report({
             increment: 25,
@@ -95,7 +91,7 @@ export function registerScanCommand(secretStorage: SecretStorage) {
               clientId: config.clientId,
               projectHash,
               branchHash,
-              scanType: ScanType.SCA,
+              scanType,
               analysisId: analysisId,
               status: ScanStatus.Incomplete,
               message: errorMessage,
@@ -118,7 +114,7 @@ export function registerScanCommand(secretStorage: SecretStorage) {
               clientId: config.clientId,
               projectHash,
               branchHash,
-              scanType: ScanType.SCA,
+              scanType,
               analysisId: analysisId,
               status: ScanStatus.Incomplete,
               message: `Error uploading manifests.`,
@@ -127,19 +123,18 @@ export function registerScanCommand(secretStorage: SecretStorage) {
           }
           progress.report({ increment: 25, message: "Starting Scan..." });
 
-          soosLogger.logLineSeparator();
           await analysisService.startScan({
             clientId: config.clientId,
             projectHash,
             analysisId: result.analysisId,
-            scanType: ScanType.SCA,
+            scanType,
             scanUrl: result.scanUrl,
           });
 
           await analysisService.waitForScanToFinish({
             scanStatusUrl: result.scanStatusUrl,
             scanUrl: result.scanUrl,
-            scanType: ScanType.SCA,
+            scanType,
           });
 
           progress.report({
@@ -158,4 +153,6 @@ export function registerScanCommand(secretStorage: SecretStorage) {
       }
     );
   });
-}
+};
+
+export { registerScanCommand };

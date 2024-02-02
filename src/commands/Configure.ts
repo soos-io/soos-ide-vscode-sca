@@ -97,10 +97,12 @@ export async function getCurrentBranchAndCommit(): Promise<{
   };
 }
 
-export function registerConfigureCommand() {
+const registerConfigureCommand = () => {
   return commands.registerCommand("soos-sca-scan.configure", async () => {
     commands.executeCommand("workbench.action.openSettings", {
       query: "soos-sca-scan",
     });
   });
-}
+};
+
+export { registerConfigureCommand };

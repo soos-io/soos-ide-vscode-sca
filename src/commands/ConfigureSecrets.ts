@@ -1,7 +1,7 @@
 import { ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
 import { SecretStorage, commands, window } from "vscode";
 
-export function registerConfigureSecretsCommand(secretStorage: SecretStorage) {
+const registerConfigureSecretsCommand = (secretStorage: SecretStorage) => {
   return commands.registerCommand(
     "soos-sca-scan.configureSecrets",
     async () => {
@@ -10,6 +10,7 @@ export function registerConfigureSecretsCommand(secretStorage: SecretStorage) {
           await window.showInputBox({
             prompt: "Enter your SOOS Client ID",
             placeHolder: "Client ID",
+            ignoreFocusOut: true,
           }),
           "clientId"
         );
@@ -18,6 +19,7 @@ export function registerConfigureSecretsCommand(secretStorage: SecretStorage) {
           await window.showInputBox({
             prompt: "Enter your SOOS API Key",
             placeHolder: "API Key",
+            ignoreFocusOut: true,
           }),
           "apiKey"
         );
@@ -35,9 +37,9 @@ export function registerConfigureSecretsCommand(secretStorage: SecretStorage) {
       }
     }
   );
-}
+};
 
-export function registerClearSecretsCommand(secretStorage: SecretStorage) {
+const registerClearSecretsCommand = (secretStorage: SecretStorage) => {
   return commands.registerCommand("soos-sca-scan.clearSecrets", async () => {
     try {
       await secretStorage.delete("soos.clientId");
@@ -56,4 +58,6 @@ export function registerClearSecretsCommand(secretStorage: SecretStorage) {
       }
     }
   });
-}
+};
+
+export { registerConfigureSecretsCommand, registerClearSecretsCommand };
