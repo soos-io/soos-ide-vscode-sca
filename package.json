@@ -1,14 +1,31 @@
 {
   "name": "soos-sca-scan",
   "displayName": "SOOS SCA Scan",
-  "description": "",
-  "version": "0.0.1",
+  "description": "The SOOS SCA Scan Visual Studio Code Extension",
+  "icon": "SOOS.png",
+  "publisher": "SOOS",
+  "galleryBanner": {
+    "color": "#FAFAFA",
+    "theme": "light"
+  },
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages", "Linters", "Other"
   ],
+  "pricing": "Free",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soos-io/soos-ide-vscode-sca.git"
+  },
+  "author": "SOOS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soos-io/soos-ide-vscode-sca/issues"
+  },
+  "homepage": "https://github.com/soos-io/soos-ide-vscode-sca#readme",
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
@@ -93,12 +110,20 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "setup:install": "npm install",
+    "setup:clean-install": "npm ci",
+    "setup:update": "npx npm-check -u",
+    "setup:clean": "npx rimraf node_modules && npx rimraf package-lock.json",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
+    "format": "prettier ./src --check",
+    "format:fix": "prettier ./src --write",
+    "lint": "eslint src --cache --ext ts --max-warnings 0",
+    "lint:fix": "npm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
     "test": "vscode-test",
+    "check": "npm run format && npm run lint && npm run typecheck && npm run compile && npm run test && npm outdated",
+    "vscode:prepublish": "npm run check",
     "link:soos-api-client": "npm link @soos-io/api-client",
     "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
@@ -113,11 +138,12 @@
     "@vscode/test-cli": "^0.0.4",
     "@vscode/test-electron": "^2.3.9",
     "eslint": "^8.56.0",
+    "prettier": "^3.2.5",
     "sinon": "^17.0.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "^0.2.37",
+    "@soos-io/api-client": "0.2.37",
     "@soos-io/soos-sca": "^2.0.21",
     "argparse": "^2.0.1",
     "glob": "^10.3.10"

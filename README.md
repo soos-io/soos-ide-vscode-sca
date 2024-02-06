@@ -31,3 +31,4 @@ If you maintain an Open Source project, sign up for the Free as in Beer [SOOS Co
 # Reference
 
 - [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) on the VS Code extension marketplace.
+- [Extension Manifest](https://vscode-docs.readthedocs.io/en/latest/extensionAPI/extension-manifest/)

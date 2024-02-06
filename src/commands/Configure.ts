@@ -15,27 +15,17 @@ export interface IAnalysisArguments {
 }
 
 export async function parseConfig(
-  secretStorage: SecretStorage
+  secretStorage: SecretStorage,
 ): Promise<IAnalysisArguments | null> {
   try {
     const config = workspace.getConfiguration("soos-sca-scan");
-    const clientId = ensureNonEmptyValue(
-      await secretStorage.get("soos.clientId"),
-      "clientId"
-    );
-    const apiKey = ensureNonEmptyValue(
-      await secretStorage.get("soos.apiKey"),
-      "apiKey"
-    );
+    const clientId = ensureNonEmptyValue(await secretStorage.get("soos.clientId"), "clientId");
+    const apiKey = ensureNonEmptyValue(await secretStorage.get("soos.apiKey"), "apiKey");
 
-    const projectName = ensureNonEmptyValue(
-      config.get<string>("projectName"),
-      "projectName"
-    );
+    const projectName = ensureNonEmptyValue(config.get<string>("projectName"), "projectName");
     const apiURL = ensureNonEmptyValue(config.get<string>("apiURL"), "apiURL");
     const filesToExclude = config.get<string[]>("filesToExclude") ?? [];
-    const directoriesToExclude =
-      config.get<string[]>("directoriesToExclude") ?? [];
+    const directoriesToExclude = config.get<string[]>("directoriesToExclude") ?? [];
     const packageManagers = config.get<string[]>("packageManagers") ?? [];
     const { branchName, commitHash } = await getCurrentBranchAndCommit();
 
@@ -54,15 +44,15 @@ export async function parseConfig(
     if (error instanceof Error) {
       error.message.includes("apiKey") || error.message.includes("clientId")
         ? window.showErrorMessage(
-            `Please configure the extension secrets first. [Configure](command:soos-sca-scan.configureSecrets)`
+            `Please configure the extension secrets first. [Configure](command:soos-sca-scan.configureSecrets)`,
           )
         : window.showErrorMessage(
             `Please configure the extension first. [Configure](command:soos-sca-scan.configure) 
-            ${error.message}`
+            ${error.message}`,
           );
     } else {
       window.showErrorMessage(
-        `Error getting the extension configuration, make sure all configuration is set. [Configure](command:soos-sca-scan.configure)`
+        `Error getting the extension configuration, make sure all configuration is set. [Configure](command:soos-sca-scan.configure)`,
       );
     }
   }
