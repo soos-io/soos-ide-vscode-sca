@@ -15,6 +15,7 @@
   "categories": [
     "Programming Languages", "Linters", "Other"
   ],
+  "pricing": "Free",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/soos-io/soos-ide-vscode-sca.git"
@@ -113,7 +114,6 @@
     "setup:clean-install": "npm ci",
     "setup:update": "npx npm-check -u",
     "setup:clean": "npx rimraf node_modules && npx rimraf package-lock.json",
-    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "format": "prettier ./src --check",
@@ -123,6 +123,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vscode-test",
     "check": "npm run format && npm run lint && npm run typecheck && npm run compile && npm run test && npm outdated",
+    "vscode:prepublish": "npm run check",
     "link:soos-api-client": "npm link @soos-io/api-client",
     "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
