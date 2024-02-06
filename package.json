@@ -103,19 +103,21 @@
     "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.6",
-    "@types/node": "18.x",
-    "@types/vscode": "^1.85.0",
     "@types/argparse": "^2.0.14",
-    "@typescript-eslint/eslint-plugin": "^6.19.1",
-    "@typescript-eslint/parser": "^6.19.1",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^18.19.14",
+    "@types/sinon": "^17.0.3",
+    "@types/vscode": "^1.86.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@vscode/test-cli": "^0.0.4",
     "@vscode/test-electron": "^2.3.9",
     "eslint": "^8.56.0",
+    "sinon": "^17.0.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "^0.2.35",
+    "@soos-io/api-client": "^0.2.37",
     "@soos-io/soos-sca": "^2.0.21",
     "argparse": "^2.0.1",
     "glob": "^10.3.10"

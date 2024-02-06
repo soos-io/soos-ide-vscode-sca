@@ -45,7 +45,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
           let projectHash: string | undefined;
           let branchHash: string | undefined;
           let analysisId: string | undefined;
-          let scanStatusUrl: string | undefined;
+
           progress.report({ increment: 25, message: "Creating scan..." });
 
           const result = await analysisService.setupScan({
@@ -68,7 +68,6 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
           projectHash = result.projectHash;
           branchHash = result.branchHash;
           analysisId = result.analysisId;
-          scanStatusUrl = result.scanStatusUrl;
 
           progress.report({
             increment: 25,
