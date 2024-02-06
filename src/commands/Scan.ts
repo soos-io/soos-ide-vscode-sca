@@ -1,18 +1,6 @@
-import {
-  IntegrationName,
-  IntegrationType,
-  ScanStatus,
-  ScanType,
-} from "@soos-io/api-client";
+import { IntegrationName, IntegrationType, ScanStatus, ScanType } from "@soos-io/api-client";
 import AnalysisService from "@soos-io/api-client/dist/services/AnalysisService";
-import {
-  commands,
-  Uri,
-  workspace,
-  window,
-  ProgressLocation,
-  SecretStorage,
-} from "vscode";
+import { commands, Uri, workspace, window, ProgressLocation, SecretStorage } from "vscode";
 import { parseConfig } from "./Configure";
 import { version } from "../../package.json";
 
@@ -25,8 +13,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
 
     const scanType = ScanType.SCA;
 
-    const sourceCodePath =
-      uri?.fsPath ?? workspace.workspaceFolders?.[0]?.uri.fsPath;
+    const sourceCodePath = uri?.fsPath ?? workspace.workspaceFolders?.[0]?.uri.fsPath;
 
     window.withProgress(
       {
@@ -37,10 +24,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
       async (progress) => {
         progress.report({ increment: 0, message: "Initializing scan..." });
         try {
-          const analysisService = AnalysisService.create(
-            config.apiKey,
-            config.apiURL
-          );
+          const analysisService = AnalysisService.create(config.apiKey, config.apiURL);
 
           let projectHash: string | undefined;
           let branchHash: string | undefined;
@@ -98,15 +82,13 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             });
           }
 
-          const allUploadsFailed = await analysisService.addManifestFilesToScan(
-            {
-              clientId: config.clientId,
-              projectHash,
-              branchHash,
-              analysisId: analysisId,
-              manifestFiles: manifestFiles,
-            }
-          );
+          const allUploadsFailed = await analysisService.addManifestFilesToScan({
+            clientId: config.clientId,
+            projectHash,
+            branchHash,
+            analysisId: analysisId,
+            manifestFiles: manifestFiles,
+          });
 
           if (allUploadsFailed) {
             await analysisService.updateScanStatus({
@@ -142,14 +124,12 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
           });
 
           window.showInformationMessage(
-            `Scan finished. [Click here to view results](${result.scanUrl})`
+            `Scan finished. [Click here to view results](${result.scanUrl})`,
           );
         } catch (error) {
-          window.showInformationMessage(
-            `Error: ${error instanceof Error ? error.message : error}`
-          );
+          window.showInformationMessage(`Error: ${error instanceof Error ? error.message : error}`);
         }
-      }
+      },
     );
   });
 };

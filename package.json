@@ -96,8 +96,12 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
+    "format": "prettier ./src --check",
+    "format:fix": "prettier ./src --write",
+    "lint": "eslint src --cache --ext ts --max-warnings 0",
+    "lint:fix": "npm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run format && npm run lint && npm run typecheck && npm run compile && npm outdated",
     "test": "vscode-test",
     "link:soos-api-client": "npm link @soos-io/api-client",
     "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
@@ -113,6 +117,7 @@
     "@vscode/test-cli": "^0.0.4",
     "@vscode/test-electron": "^2.3.9",
     "eslint": "^8.56.0",
+    "prettier": "^3.2.5",
     "sinon": "^17.0.1",
     "typescript": "^5.3.3"
   },
