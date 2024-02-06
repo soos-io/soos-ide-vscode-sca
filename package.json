@@ -2,13 +2,29 @@
   "name": "soos-sca-scan",
   "displayName": "SOOS SCA Scan",
   "description": "",
+  "icon": "SOOS.png",
+  "publisher": "SOOS",
+  "galleryBanner": {
+    "color": "#FAFAFA",
+    "theme": "light"
+  },
   "version": "0.0.2",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages", "Linters"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soos-io/soos-ide-vscode-sca.git"
+  },
+  "author": "SOOS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soos-io/soos-ide-vscode-sca/issues"
+  },
+  "homepage": "https://github.com/soos-io/soos-ide-vscode-sca#readme",
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
