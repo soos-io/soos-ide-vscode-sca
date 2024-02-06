@@ -1,7 +1,7 @@
 {
   "name": "soos-sca-scan",
   "displayName": "SOOS SCA Scan",
-  "description": "",
+  "description": "The SOOS SCA Scan Visual Studio Code Extension",
   "icon": "SOOS.png",
   "publisher": "SOOS",
   "galleryBanner": {
