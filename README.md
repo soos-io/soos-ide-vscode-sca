@@ -27,3 +27,7 @@ If you maintain an Open Source project, sign up for the Free as in Beer [SOOS Co
 ![Perform scan from command](./assets/Perform_Scan_command.gif)
 
 ![Perform scan from menu](./assets/Perform_Scan_menu.gif)
+
+# Reference
+
+- [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) on the VS Code extension marketplace.
