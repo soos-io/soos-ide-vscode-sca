@@ -2,7 +2,7 @@
   "name": "soos-sca-scan",
   "displayName": "SOOS SCA Scan",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -93,6 +93,10 @@
     }
   },
   "scripts": {
+    "setup:install": "npm install",
+    "setup:clean-install": "npm ci",
+    "setup:update": "npx npm-check -u",
+    "setup:clean": "npx rimraf node_modules && npx rimraf package-lock.json",
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
@@ -122,7 +126,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "^0.2.37",
+    "@soos-io/api-client": "0.2.37",
     "@soos-io/soos-sca": "^2.0.21",
     "argparse": "^2.0.1",
     "glob": "^10.3.10"
