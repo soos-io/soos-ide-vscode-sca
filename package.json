@@ -101,8 +101,8 @@
     "lint": "eslint src --cache --ext ts --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
     "typecheck": "tsc --noEmit",
-    "check": "npm run format && npm run lint && npm run typecheck && npm run compile && npm outdated",
     "test": "vscode-test",
+    "check": "npm run format && npm run lint && npm run typecheck && npm run compile && npm run test && npm outdated",
     "link:soos-api-client": "npm link @soos-io/api-client",
     "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
