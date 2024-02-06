@@ -1,6 +1,6 @@
 {
   "name": "soos-sca-scan",
-  "displayName": "SOOS Sca Scan",
+  "displayName": "SOOS SCA Scan",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -99,7 +99,7 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "vscode-test",
-    "link:soos-api-client": "npm link @soos-io/api-client && npm run build && npm link",
+    "link:soos-api-client": "npm link @soos-io/api-client",
     "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
   "devDependencies": {

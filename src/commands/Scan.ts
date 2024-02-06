@@ -75,7 +75,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             message: "Locating manifests...",
           });
 
-          const manifestFiles = await analysisService.searchManifestFiles({
+          const manifestFiles = await analysisService.findManifestFiles({
             clientId: config.clientId,
             projectHash,
             filesToExclude: config.filesToExclude,

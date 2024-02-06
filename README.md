@@ -1,71 +1,29 @@
-# soos-sca-scan README
+# SOOS SCA Visual Studio Extension
 
-This is the README for your extension "soos-sca-scan". After writing up a brief description, we recommend including the following sections.
+SOOS is an independent software security company, located in Winooski, VT USA, building security software for your team. [SOOS, Software security, simplified](https://soos.io).
 
-## Features
+Use SOOS to scan your software for [vulnerabilities](https://app.soos.io/research/vulnerabilities) and [open source license](https://app.soos.io/research/licenses) issues with [SOOS Core SCA](https://soos.io/products/sca). [Generate and ingest SBOMs](https://soos.io/products/sbom-manager). [Export reports](https://kb.soos.io/help/soos-reports-for-export) to industry standards. Govern your open source dependencies. Run the [SOOS DAST vulnerability scanner](https://soos.io/products/dast) against your web apps or APIs. [Scan your Docker containers](https://soos.io/products/containers) for vulnerabilities. Check your source code for issues with [SAST Analysis](https://soos.io/products/sast).
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+[Demo SOOS](https://app.soos.io/demo) or [Register for a Free Trial](https://app.soos.io/register).
 
-For example if there is an image subfolder under your extension project workspace:
+If you maintain an Open Source project, sign up for the Free as in Beer [SOOS Community Edition](https://soos.io/products/community-edition).
 
-\!\[feature X\]\(images/feature-x.png\)
+# Requirements
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- Having a valid account on SOOS. [Register for a Free Trial](https://app.soos.io/register)
 
-## Requirements
+# How to use it
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+1. Configure the secrets using the `Configure SOOS SCA Secrets` command, it will ask you for your client and api key, that can be found on the [integrate page](https://app.soos.io/integrate/sca/)
 
-## Extension Settings
+![Configure secrets](./assets/Configure_Secrets.gif)
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+2. Configure Project Name and additional settings running the `Configure SOOS SCA Scan` command.
 
-For example:
+![Configure settings](./assets/Configure_Settings.gif)
 
-This extension contributes the following settings:
+3. Once settings are set up we can run it, in here we have two options, one will be to manually run the `Run SOOS SCA Scan` from the command palette or select the folder directly from the sidebar and click con `Run SOOS SCA Scan` from there.
 
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
+![Perform scan from command](./assets/Perform_Scan_command.gif)
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+![Perform scan from menu](./assets/Perform_Scan_menu.gif)

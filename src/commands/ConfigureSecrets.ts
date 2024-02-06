@@ -11,6 +11,7 @@ const registerConfigureSecretsCommand = (secretStorage: SecretStorage) => {
             prompt: "Enter your SOOS Client ID",
             placeHolder: "Client ID",
             ignoreFocusOut: true,
+            password: true,
           }),
           "clientId"
         );
@@ -20,12 +21,17 @@ const registerConfigureSecretsCommand = (secretStorage: SecretStorage) => {
             prompt: "Enter your SOOS API Key",
             placeHolder: "API Key",
             ignoreFocusOut: true,
+            password: true,
           }),
           "apiKey"
         );
 
         secretStorage.store("soos.clientId", clientId);
         secretStorage.store("soos.apiKey", apiKey);
+
+        window.showInformationMessage(
+          "SOOS SCA secrets configured successfully."
+        );
       } catch (error) {
         if (error instanceof Error) {
           window.showErrorMessage(error.message);
