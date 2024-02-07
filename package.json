@@ -8,15 +8,28 @@
     "color": "#FAFAFA",
     "theme": "light"
   },
+  "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
-    "Programming Languages", "Linters", "Other"
+    "Programming Languages",
+    "Linters",
+    "Other"
   ],
   "keywords": [
-    "soos", "sca", "security", "code", "scan", "dependency", "vulnerability", "analysis", "software", "composition", "analysis"
+    "soos",
+    "sca",
+    "security",
+    "code",
+    "scan",
+    "dependency",
+    "vulnerability",
+    "analysis",
+    "software",
+    "composition",
+    "analysis"
   ],
   "pricing": "Free",
   "repository": {
@@ -127,19 +140,22 @@
     "test": "vscode-test",
     "check": "npm run format && npm run lint && npm run typecheck && npm run compile && npm run test && npm outdated",
     "vscode:prepublish": "npm run check",
+    "publish:pre-release": "vsce publish --pre-release",
+    "publish:release": "vsce publish",
     "link:soos-api-client": "npm link @soos-io/api-client",
     "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
   "devDependencies": {
     "@types/argparse": "^2.0.14",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^18.19.14",
+    "@types/node": "^20.11.16",
     "@types/sinon": "^17.0.3",
     "@types/vscode": "^1.86.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vscode/test-cli": "^0.0.4",
     "@vscode/test-electron": "^2.3.9",
+    "@vscode/vsce": "^2.23.0",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
     "sinon": "^17.0.1",
