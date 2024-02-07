@@ -138,7 +138,7 @@
     "lint:fix": "npm run lint -- --fix",
     "typecheck": "tsc --noEmit",
     "test": "vscode-test",
-    "vscode:prepublish": "npm run check",
+    "vscode:prepublish": "npm run publish:check",
     "publish:check": "npm run format && npm run lint && npm run typecheck && npm run compile",
     "publish:pre-release": "vsce publish --pre-release -p $PAT",
     "publish:release": "vsce publish -p $PAT",
