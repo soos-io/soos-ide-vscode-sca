@@ -1,6 +1,7 @@
 import { SecretStorage, commands, extensions, window, workspace } from "vscode";
 import { GitExtension } from "../git";
 import { ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
+import * as Path from "path";
 
 export interface IAnalysisArguments {
   apiKey: string;
@@ -16,13 +17,19 @@ export interface IAnalysisArguments {
 
 export async function parseConfig(
   secretStorage: SecretStorage,
+  sourceCodePath: string,
 ): Promise<IAnalysisArguments | null> {
   try {
     const config = workspace.getConfiguration("soos-sca-scan");
     const clientId = ensureNonEmptyValue(await secretStorage.get("soos.clientId"), "clientId");
     const apiKey = ensureNonEmptyValue(await secretStorage.get("soos.apiKey"), "apiKey");
 
-    const projectName = ensureNonEmptyValue(config.get<string>("projectName"), "projectName");
+    const projectName = ensureNonEmptyValue(
+      config.get<string>("projectName") && config.get<string>("projectName")?.trim() !== ""
+        ? config.get<string>("projectName")
+        : Path.basename(sourceCodePath),
+      "projectName",
+    );
     const apiURL = ensureNonEmptyValue(config.get<string>("apiURL"), "apiURL");
     const filesToExclude = config.get<string[]>("filesToExclude") ?? [];
     const directoriesToExclude = config.get<string[]>("directoriesToExclude") ?? [];
@@ -90,7 +97,10 @@ export async function getCurrentBranchAndCommit(): Promise<{
 
 const registerConfigureCommand = () => {
   return commands.registerCommand("soos-sca-scan.configure", async () => {
-    commands.executeCommand("workbench.action.openSettings", {
+    const commandToExecute = workspace.workspaceFile
+      ? "workbench.action.openWorkspaceSettings"
+      : "workbench.action.openSettings";
+    await commands.executeCommand(commandToExecute, {
       query: "soos-sca-scan",
     });
   });

@@ -9,7 +9,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -92,7 +92,6 @@
         },
         "soos-sca-scan.projectName": {
           "type": "string",
-          "default": "",
           "markdownDescription": "Project Name - this is what will be displayed in the SOOS app."
         }
       }
