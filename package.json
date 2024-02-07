@@ -15,6 +15,9 @@
   "categories": [
     "Programming Languages", "Linters", "Other"
   ],
+  "keywords": [
+    "soos", "sca", "security", "code", "scan", "dependency", "vulnerability", "analysis", "software", "composition", "analysis"
+  ],
   "pricing": "Free",
   "repository": {
     "type": "git",
