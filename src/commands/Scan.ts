@@ -6,14 +6,14 @@ import { version } from "../../package.json";
 
 const registerScanCommand = (secretStorage: SecretStorage) => {
   return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri) => {
-    const config = await parseConfig(secretStorage);
-    if (!config) {
-      return;
-    }
-
     const scanType = ScanType.SCA;
 
     const sourceCodePath = uri?.fsPath ?? workspace.workspaceFolders?.[0]?.uri.fsPath;
+
+    const config = await parseConfig(secretStorage, sourceCodePath);
+    if (!config) {
+      return;
+    }
 
     window.withProgress(
       {
