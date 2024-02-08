@@ -1,6 +1,7 @@
 ### Changes:
   - Description of the change
   - Updated package.json version
+  - Update CHANGELOG.md
 
 **Ticket:** https://soos.atlassian.net/browse/PA-0000
 
