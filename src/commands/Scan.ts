@@ -61,51 +61,26 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
           const manifestFiles = await analysisService.findManifestFiles({
             clientId: config.clientId,
             projectHash,
+            branchHash,
+            analysisId: analysisId,
+            scanType,
+            scanStatusUrl: result.scanStatusUrl,
             filesToExclude: config.filesToExclude,
             directoriesToExclude: config.directoriesToExclude,
             sourceCodePath: sourceCodePath,
             packageManagers: config.packageManagers,
           });
 
-          if (manifestFiles.length === 0) {
-            const errorMessage =
-              "No valid manifests found, cannot continue. For more help, please visit https://kb.soos.io/help/error-no-valid-manifests-found";
-            await analysisService.updateScanStatus({
-              clientId: config.clientId,
-              projectHash,
-              branchHash,
-              scanType,
-              analysisId: analysisId,
-              status: ScanStatus.Incomplete,
-              message: errorMessage,
-              scanStatusUrl: result.scanStatusUrl,
-            });
-            window.showErrorMessage(errorMessage);
-            return;
-          }
-
-          const allUploadsFailed = await analysisService.addManifestFilesToScan({
+          await analysisService.addManifestFilesToScan({
             clientId: config.clientId,
             projectHash,
             branchHash,
             analysisId: analysisId,
+            scanType,
+            scanStatusUrl: result.scanStatusUrl,
             manifestFiles: manifestFiles,
           });
 
-          if (allUploadsFailed) {
-            await analysisService.updateScanStatus({
-              clientId: config.clientId,
-              projectHash,
-              branchHash,
-              scanType,
-              analysisId: analysisId,
-              status: ScanStatus.Incomplete,
-              message: `Error uploading manifests.`,
-              scanStatusUrl: result.scanStatusUrl,
-            });
-            window.showErrorMessage(`Error uploading manifests.`);
-            return;
-          }
           progress.report({ increment: 25, message: "Starting Scan..." });
 
           await analysisService.startScan({
@@ -131,7 +106,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             `Scan finished. [Click here to view results](${result.scanUrl})`,
           );
         } catch (error) {
-          window.showInformationMessage(`Error: ${error instanceof Error ? error.message : error}`);
+          window.showErrorMessage(`Error: ${error instanceof Error ? error.message : error}`);
         }
       },
     );
