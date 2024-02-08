@@ -106,7 +106,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             `Scan finished. [Click here to view results](${result.scanUrl})`,
           );
         } catch (error) {
-          window.showErrorMessage(`Error: ${error instanceof Error ? error.message : error}`);
+          window.showErrorMessage(error instanceof Error ? error.message : `Error: ${error}`);
         }
       },
     );
