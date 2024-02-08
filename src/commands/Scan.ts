@@ -80,6 +80,8 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
               message: errorMessage,
               scanStatusUrl: result.scanStatusUrl,
             });
+            window.showErrorMessage(errorMessage);
+            return;
           }
 
           const allUploadsFailed = await analysisService.addManifestFilesToScan({
@@ -101,6 +103,8 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
               message: `Error uploading manifests.`,
               scanStatusUrl: result.scanStatusUrl,
             });
+            window.showErrorMessage(`Error uploading manifests.`);
+            return;
           }
           progress.report({ increment: 25, message: "Starting Scan..." });
 

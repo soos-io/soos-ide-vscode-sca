@@ -2,6 +2,7 @@ import { SecretStorage, commands, extensions, window, workspace } from "vscode";
 import { GitExtension } from "../git";
 import { ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
 import * as Path from "path";
+import { SOOS_CONSTANTS } from "@soos-io/api-client";
 
 export interface IAnalysisArguments {
   apiKey: string;
@@ -30,7 +31,7 @@ export async function parseConfig(
         : Path.basename(sourceCodePath),
       "projectName",
     );
-    const apiURL = ensureNonEmptyValue(config.get<string>("apiURL"), "apiURL");
+    const apiURL = config.get<string>("apiURL") ?? SOOS_CONSTANTS.Urls.API.Analysis;
     const filesToExclude = config.get<string[]>("filesToExclude") ?? [];
     const directoriesToExclude = config.get<string[]>("directoriesToExclude") ?? [];
     const packageManagers = config.get<string[]>("packageManagers") ?? [];
