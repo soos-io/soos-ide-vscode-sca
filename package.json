@@ -9,7 +9,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -48,11 +48,7 @@
     "configuration": {
       "title": "SOOS SCA",
       "properties": {
-        "soos-sca-scan.apiURL": {
-          "type": "string",
-          "default": "https://api.soos.io/api/",
-          "markdownDescription": "SOOS API URL - Intended for internal use only, do not modify."
-        },
+
         "soos-sca-scan.directoriesToExclude": {
           "type": "array",
           "markdownDescription": "Listing of directories or patterns to exclude from the search for manifest files. eg: **bin/start/**, **/start/**",
@@ -163,7 +159,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "^0.2.38",
+    "@soos-io/api-client": "^0.2.39",
     "@soos-io/soos-sca": "^2.0.21",
     "argparse": "^2.0.1",
     "glob": "^10.3.10"
