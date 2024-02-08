@@ -1,4 +1,4 @@
-# SOOS SCA Visual Studio Extension
+# SOOS SCA Visual Studio Code Extension
 
 SOOS is an independent software security company, located in Winooski, VT USA, building security software for your team. [SOOS, Software security, simplified](https://soos.io).
 

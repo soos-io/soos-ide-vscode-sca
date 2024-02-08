@@ -139,7 +139,8 @@
     "publish:release": "vsce publish -p $PAT",
     "check": "npm run publish:check && npm run test && npm outdated",
     "link:soos-api-client": "npm link @soos-io/api-client",
-    "patch-api-client": "npm version patch --no-git-tag-version && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
+    "patch": "npm version patch --no-git-tag-version",
+    "patch-api-client": "npm run patch && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
   "devDependencies": {
     "@types/argparse": "^2.0.14",
@@ -158,7 +159,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "0.2.37",
+    "@soos-io/api-client": "^0.2.38",
     "@soos-io/soos-sca": "^2.0.21",
     "argparse": "^2.0.1",
     "glob": "^10.3.10"
