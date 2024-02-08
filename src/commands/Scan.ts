@@ -1,4 +1,4 @@
-import { IntegrationName, IntegrationType, ScanStatus, ScanType } from "@soos-io/api-client";
+import { IntegrationName, IntegrationType, ScanType } from "@soos-io/api-client";
 import AnalysisService from "@soos-io/api-client/dist/services/AnalysisService";
 import { commands, Uri, workspace, window, ProgressLocation, SecretStorage } from "vscode";
 import { parseConfig } from "./Configure";
