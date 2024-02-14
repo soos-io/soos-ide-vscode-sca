@@ -49,18 +49,15 @@ export async function parseConfig(
       commitHash,
     };
   } catch (error) {
-    if (error instanceof Error) {
-      error.message.includes("apiKey") || error.message.includes("clientId")
-        ? window.showErrorMessage(
-            `Please configure the extension secrets first. [Configure](command:soos-sca-scan.configureSecrets)`,
-          )
-        : window.showErrorMessage(
-            `Please configure the extension first. [Configure](command:soos-sca-scan.configure) 
-            ${error.message}`,
-          );
+    if (error instanceof Error && error.message) {
+      const message =
+        error.message.includes("apiKey") || error.message.includes("clientId")
+          ? "Please configure the extension secrets first. [Configure](command:soos-sca-scan.configureSecrets)"
+          : `Please configure the extension first. [Configure](command:soos-sca-scan.configure) ${error.message}`;
+      window.showErrorMessage(message);
     } else {
       window.showErrorMessage(
-        `Error getting the extension configuration, make sure all configuration is set. [Configure](command:soos-sca-scan.configure)`,
+        `Error getting the extension configuration, please reconfigure the extension. [Configure](command:soos-sca-scan.configure)`,
       );
     }
   }

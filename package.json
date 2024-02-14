@@ -9,7 +9,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -48,7 +48,6 @@
     "configuration": {
       "title": "SOOS SCA",
       "properties": {
-
         "soos-sca-scan.directoriesToExclude": {
           "type": "array",
           "markdownDescription": "Listing of directories or patterns to exclude from the search for manifest files. eg: **bin/start/**, **/start/**",
@@ -145,12 +144,12 @@
   "devDependencies": {
     "@types/argparse": "^2.0.14",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.16",
+    "@types/node": "^20.11.17",
     "@types/sinon": "^17.0.3",
     "@types/vscode": "^1.86.0",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "@vscode/test-cli": "^0.0.4",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "@vscode/test-cli": "^0.0.6",
     "@vscode/test-electron": "^2.3.9",
     "@vscode/vsce": "^2.23.0",
     "eslint": "^8.56.0",
