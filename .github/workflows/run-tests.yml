@@ -26,6 +26,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y xvfb
-      - name: Run tests
+      - name: Run check/tests
         run: |
-          xvfb-run --auto-servernum npm run test
+          xvfb-run --auto-servernum npm run check
