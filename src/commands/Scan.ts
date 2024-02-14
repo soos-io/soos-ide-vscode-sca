@@ -4,6 +4,12 @@ import { commands, Uri, workspace, window, ProgressLocation, SecretStorage } fro
 import { parseConfig } from "./Configure";
 import { version } from "../../package.json";
 
+const convertLinksInTextToMarkdown = (text: string): string => {
+  const linkRegex = /(?:https?):\/\/[^\s/$.?#].[^\s]*/gi;
+  const markdownText = text.replace(linkRegex, (match) => `[${match}](${match})`);
+  return markdownText;
+};
+
 const registerScanCommand = (secretStorage: SecretStorage) => {
   return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri) => {
     const scanType = ScanType.SCA;
@@ -106,7 +112,11 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             `Scan finished. [Click here to view results](${result.scanUrl})`,
           );
         } catch (error) {
-          window.showErrorMessage(error instanceof Error ? error.message : `Error: ${error}`);
+          window.showErrorMessage(
+            error instanceof Error && error.message
+              ? convertLinksInTextToMarkdown(error.message)
+              : `Error: ${error}`,
+          );
         }
       },
     );

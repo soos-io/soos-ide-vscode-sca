@@ -29,11 +29,11 @@ const registerConfigureSecretsCommand = (secretStorage: SecretStorage) => {
 
       window.showInformationMessage("SOOS SCA secrets configured successfully.");
     } catch (error) {
-      if (error instanceof Error) {
-        window.showErrorMessage(error.message);
-      } else {
-        window.showErrorMessage("An error occurred while configuring the extension secrets.");
-      }
+      window.showErrorMessage(
+        error instanceof Error && error.message
+          ? error.message
+          : "An error occurred while configuring the extension secrets.",
+      );
     }
   });
 };
@@ -46,11 +46,11 @@ const registerClearSecretsCommand = (secretStorage: SecretStorage) => {
 
       window.showInformationMessage("SOOS SCA extension secrets cleared successfully.");
     } catch (error) {
-      if (error instanceof Error) {
-        window.showErrorMessage(error.message);
-      } else {
-        window.showErrorMessage("An error occurred while clearing the extension secrets.");
-      }
+      window.showErrorMessage(
+        error instanceof Error && error.message
+          ? error.message
+          : "An error occurred while clearing the extension secrets.",
+      );
     }
   });
 };
