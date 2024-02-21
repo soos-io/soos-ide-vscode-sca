@@ -3,3 +3,7 @@
 ## 0.1.x (Pre-Release)
 
 Initial pre-release version.
+
+## 0.2.0 (Release)
+
+Initial release version.
