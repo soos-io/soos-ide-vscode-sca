@@ -147,15 +147,15 @@
   "devDependencies": {
     "@types/argparse": "^2.0.14",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.17",
+    "@types/node": "^20.11.19",
     "@types/sinon": "^17.0.3",
     "@types/vscode": "^1.86.0",
-    "@typescript-eslint/eslint-plugin": "^7.0.1",
-    "@typescript-eslint/parser": "^7.0.1",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
     "@vscode/test-cli": "^0.0.6",
     "@vscode/test-electron": "^2.3.9",
     "@vscode/vsce": "^2.23.0",
-    "esbuild": "^0.20.0",
+    "esbuild": "^0.20.1",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
     "sinon": "^17.0.1",
@@ -163,7 +163,7 @@
   },
   "dependencies": {
     "@soos-io/api-client": "^0.2.39",
-    "@soos-io/soos-sca": "^2.0.21",
+    "@soos-io/soos-sca": "^2.0.23",
     "argparse": "^2.0.1",
     "glob": "^10.3.10"
   }
