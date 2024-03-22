@@ -11,3 +11,7 @@ Initial release version.
 ## 0.2.1 (Release)
 
 Update SOOS logo.
+
+## 0.2.3 (Release)
+
+Dependency updates.
