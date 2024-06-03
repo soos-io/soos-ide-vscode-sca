@@ -163,7 +163,7 @@
   },
   "dependencies": {
     "@soos-io/api-client": "0.2.48",
-    "@soos-io/soos-sca": "^2.0.28",
+    "@soos-io/soos-sca": "2.0.28",
     "argparse": "^2.0.1",
     "glob": "^10.4.1"
   }
