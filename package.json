@@ -147,7 +147,7 @@
   "devDependencies": {
     "@types/argparse": "^2.0.15",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.14.0",
     "@types/sinon": "^17.0.3",
     "@types/vscode": "^1.86.0",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -157,8 +157,8 @@
     "@vscode/vsce": "^2.23.0",
     "esbuild": "^0.20.2",
     "eslint": "^8.56.0",
-    "prettier": "^3.2.5",
-    "sinon": "^17.0.2",
+    "prettier": "^3.3.0",
+    "sinon": "^18.0.0",
     "typescript": "^5.4.2"
   },
   "dependencies": {
