@@ -1,8 +1,8 @@
 import { SecretStorage, commands, extensions, window, workspace } from "vscode";
 import { GitExtension } from "../git";
-import { ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
+import { ensureEnumValue, ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
 import * as Path from "path";
-import { SOOS_CONSTANTS } from "@soos-io/api-client";
+import { FileMatchTypeEnum, SOOS_CONSTANTS } from "@soos-io/api-client";
 
 export interface IAnalysisArguments {
   apiKey: string;
@@ -12,6 +12,7 @@ export interface IAnalysisArguments {
   directoriesToExclude: string[];
   filesToExclude: string[];
   packageManagers: string[];
+  fileMatchType: FileMatchTypeEnum;
   branchName: string | null;
   commitHash: string | null;
 }
@@ -35,6 +36,10 @@ export async function parseConfig(
     const filesToExclude = config.get<string[]>("filesToExclude") ?? [];
     const directoriesToExclude = config.get<string[]>("directoriesToExclude") ?? [];
     const packageManagers = config.get<string[]>("packageManagers") ?? [];
+    const fileMatchType =
+      (config.get<string>("fileMatchType")
+        ? ensureEnumValue<FileMatchTypeEnum>(FileMatchTypeEnum, config.get<string>("fileMatchType"))
+        : undefined) ?? FileMatchTypeEnum.Manifest;
     const { branchName, commitHash } = await getCurrentBranchAndCommit();
 
     return {
@@ -45,6 +50,7 @@ export async function parseConfig(
       filesToExclude,
       directoriesToExclude,
       packageManagers,
+      fileMatchType,
       branchName,
       commitHash,
     };
