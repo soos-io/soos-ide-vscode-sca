@@ -19,8 +19,11 @@ const convertLinksInTextToMarkdown = (text: string): string => {
 const registerScanCommand = (secretStorage: SecretStorage) => {
   return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri) => {
     const scanType = ScanType.SCA;
-
-    const sourceCodePath = uri?.fsPath ?? workspace.workspaceFolders?.[0]?.uri.fsPath;
+    const sourceCodePath = uri?.fsPath ?? workspace.workspaceFolders?.at(0)?.uri.fsPath;
+    if (sourceCodePath === undefined) {
+      window.showErrorMessage("No workspace available. Please open a folder to run an SCA scan.");
+      return;
+    }
 
     const config = await parseConfig(secretStorage, sourceCodePath);
     if (!config) {
