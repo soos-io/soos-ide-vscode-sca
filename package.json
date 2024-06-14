@@ -96,7 +96,7 @@
               "ManifestAndFileHash"
             ]
           },
-          "markdownDescription": "Choose which type of files to look for on your SCA scan."
+          "markdownDescription": "Choose which type of files to look for on your SCA scan: Manifest, FileHash, or ManifestAndFileHash."
         },
         "soos-sca-scan.projectName": {
           "type": "string",
