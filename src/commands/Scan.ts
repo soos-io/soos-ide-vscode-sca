@@ -75,7 +75,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             projectHash,
             filesToExclude: config.filesToExclude,
             directoriesToExclude: config.directoriesToExclude,
-            sourceCodePath: sourceCodePath,
+            sourceCodePath,
             packageManagers: config.packageManagers,
             fileMatchType: config.fileMatchType,
           });
