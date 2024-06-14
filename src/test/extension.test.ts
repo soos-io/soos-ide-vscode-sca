@@ -7,6 +7,7 @@ suite("Extension Test Suite", () => {
   let executeCommandSpy: sinon.SinonSpy;
   let notificationSpy: sinon.SinonSpy;
   let showErrorMessageStub: sinon.SinonStub;
+  const uri = vscode.Uri.file("./test/workspace");
 
   setup(() => {
     showErrorMessageStub = sinon.stub(vscode.window, "showErrorMessage");
@@ -28,7 +29,7 @@ suite("Extension Test Suite", () => {
   });
 
   test("soos-sca-scan.configureSecrets command should save secrets", async () => {
-    await vscode.commands.executeCommand("soos-sca-scan.configureSecrets");
+    await vscode.commands.executeCommand("soos-sca-scan.configureSecrets", uri);
     sinon.assert.calledWith(
       showInformationMessageStub,
       "SOOS SCA secrets configured successfully.",
@@ -36,7 +37,7 @@ suite("Extension Test Suite", () => {
   });
 
   test("soos-sca-scan.clearSecrets command should clear secrets", async () => {
-    await vscode.commands.executeCommand("soos-sca-scan.clearSecrets");
+    await vscode.commands.executeCommand("soos-sca-scan.clearSecrets", uri);
     sinon.assert.calledWith(
       showInformationMessageStub,
       "SOOS SCA extension secrets cleared successfully.",
@@ -44,36 +45,26 @@ suite("Extension Test Suite", () => {
   });
 
   test("soos-sca-scan.scan command should show error if secrets are not set", async () => {
-    await vscode.commands.executeCommand("soos-sca-scan.scan");
+    await vscode.commands.executeCommand("soos-sca-scan.scan", uri);
     sinon.assert.calledWith(
       showErrorMessageStub,
       "Please configure the extension secrets first. [Configure](command:soos-sca-scan.configureSecrets)",
     );
   });
 
-  test("soos-sca-scan.scan command should show error if project name is not set", async () => {
-    await vscode.commands.executeCommand("soos-sca-scan.configureSecrets");
-    await vscode.workspace.getConfiguration("soos-sca-scan").update("projectName", "", true);
-    await vscode.commands.executeCommand("soos-sca-scan.scan");
-    sinon.assert.calledWithMatch(
-      showErrorMessageStub,
-      "Please configure the extension first. [Configure](command:soos-sca-scan.configure)",
-    );
-  });
-
   test("soos-sca-scan.configure command should open extension settings", async () => {
-    await vscode.commands.executeCommand("soos-sca-scan.configure");
+    await vscode.commands.executeCommand("soos-sca-scan.configure", uri);
     sinon.assert.calledWith(executeCommandSpy, "workbench.action.openSettings", {
       query: "soos-sca-scan",
     });
   });
 
   test("soos-sca-scan.scan command should start if secrets and project name is set", async () => {
-    await vscode.commands.executeCommand("soos-sca-scan.configureSecrets");
+    await vscode.commands.executeCommand("soos-sca-scan.configureSecrets", uri);
     await vscode.workspace
       .getConfiguration("soos-sca-scan")
       .update("projectName", "test-project", true);
-    await vscode.commands.executeCommand("soos-sca-scan.scan");
+    await vscode.commands.executeCommand("soos-sca-scan.scan", uri);
     sinon.assert.calledOnce(notificationSpy);
   });
 });

@@ -9,7 +9,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -84,6 +84,19 @@
           },
           "uniqueItems": true,
           "markdownDescription": "Select package managers to include when searching for manifest files. If none are selected, all package managers will be included."
+        },
+        "soos-sca-scan.fileMatchType": {
+          "type": "string",
+          "default": "Manifest",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Manifest",
+              "FileHash",
+              "ManifestAndFileHash"
+            ]
+          },
+          "markdownDescription": "Choose which type of files to look for on your SCA scan: Manifest, FileHash, or ManifestAndFileHash."
         },
         "soos-sca-scan.projectName": {
           "type": "string",
@@ -163,7 +176,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
-    "@soos-io/api-client": "0.2.48",
+    "@soos-io/api-client": "0.3.1",
     "@soos-io/soos-sca": "2.0.28",
     "argparse": "^2.0.1",
     "glob": "^10.4.1"
