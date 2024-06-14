@@ -159,10 +159,16 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
           const scanStatus = await analysisService.analysisApiClient.getScanStatus({
             scanStatusUrl: result.scanStatusUrl,
           });
-          const formattedOutput = analysisService
-            .getFinalScanStatusMessage(scanType, scanStatus, result.scanUrl, false)
-            .join("\r\n");
-          window.showInformationMessage(convertLinksInTextToMarkdown(formattedOutput));
+          const scanStatusMessages = analysisService.getFinalScanStatusMessage(
+            scanType,
+            scanStatus,
+            result.scanUrl,
+            false,
+          );
+          const formattedMessage = convertLinksInTextToMarkdown(
+            `${scanStatusMessages.at(0)} ${scanStatusMessages.slice(1).join(", ")}`,
+          );
+          window.showInformationMessage(formattedMessage);
         } catch (error) {
           window.showErrorMessage(
             error instanceof Error && error.message
