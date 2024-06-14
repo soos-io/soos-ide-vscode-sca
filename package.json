@@ -85,6 +85,19 @@
           "uniqueItems": true,
           "markdownDescription": "Select package managers to include when searching for manifest files. If none are selected, all package managers will be included."
         },
+        "soos-sca-scan.fileMatchType": {
+          "type": "string",
+          "default": "Manifest",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Manifest",
+              "FileHash",
+              "ManifestAndFileHash"
+            ]
+          },
+          "markdownDescription": "Choose which type of files to look for on your SCA scan."
+        },
         "soos-sca-scan.projectName": {
           "type": "string",
           "markdownDescription": "Project Name - this is what will be displayed in the SOOS app."
