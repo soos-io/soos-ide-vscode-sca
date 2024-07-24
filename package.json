@@ -9,7 +9,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "engines": {
     "vscode": "^1.91.0"
   },
@@ -177,8 +177,7 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "0.3.2",
-    "@soos-io/soos-sca": "^3.0.4",
+    "@soos-io/api-client": "0.3.3",
     "argparse": "^2.0.1",
     "glob": "^10.4.5"
   }
