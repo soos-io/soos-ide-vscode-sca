@@ -177,7 +177,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@soos-io/api-client": "1.1.2",
+    "@soos-io/api-client": "1.1.3",
     "argparse": "^2.0.1",
     "glob": "^11.0.1"
   }
