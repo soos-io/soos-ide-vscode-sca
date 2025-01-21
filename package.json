@@ -9,7 +9,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.4.17",
+  "version": "0.4.18",
   "engines": {
     "vscode": "^1.95.0"
   },
