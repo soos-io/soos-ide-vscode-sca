@@ -2,7 +2,7 @@
   "name": "soos-sca-scan",
   "displayName": "SOOS SCA Scan",
   "description": "The SOOS SCA Scan Visual Studio Code Extension",
-  "type":"module",
+  "type": "commonjs",
   "icon": "SOOS.png",
   "publisher": "SOOS",
   "galleryBanner": {
@@ -162,7 +162,6 @@
   },
   "devDependencies": {
     "@types/argparse": "^2.0.17",
-    "@types/mocha": "^10.0.10",
     "@types/node": "^20.14.15",
     "@types/sinon": "^17.0.3",
     "@types/vscode": "^1.95.0",
@@ -174,6 +173,7 @@
     "esbuild": "^0.25.0",
     "eslint": "^9.20.1",
     "eslint-plugin-prettier": "^5.2.3",
+    "mocha": "^11.1.0",
     "prettier": "^3.4.2",
     "sinon": "^19.0.2",
     "typescript": "^5.7.2"
@@ -182,5 +182,8 @@
     "@soos-io/api-client": "1.1.9",
     "argparse": "^2.0.1",
     "glob": "^11.0.1"
+  },
+  "overrides": {
+    "mocha": "^11.1.0"
   }
 }
