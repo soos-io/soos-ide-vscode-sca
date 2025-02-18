@@ -4,7 +4,7 @@ import { ensureEnumValue, ensureNonEmptyValue } from "@soos-io/api-client/dist/u
 import * as Path from "path";
 import { FileMatchTypeEnum, SOOS_CONSTANTS } from "@soos-io/api-client";
 
-export interface IAnalysisArguments {
+interface IAnalysisArguments {
   apiKey: string;
   clientId: string;
   projectName: string;
@@ -17,10 +17,10 @@ export interface IAnalysisArguments {
   commitHash: string | null;
 }
 
-export async function parseConfig(
+export const parseConfig = async (
   secretStorage: SecretStorage,
   sourceCodePath: string,
-): Promise<IAnalysisArguments | null> {
+): Promise<IAnalysisArguments | null> => {
   try {
     const config = workspace.getConfiguration("soos-sca-scan");
     const clientId = ensureNonEmptyValue(await secretStorage.get("soos.clientId"), "clientId");
@@ -68,12 +68,12 @@ export async function parseConfig(
     }
   }
   return null;
-}
+};
 
-export async function getCurrentBranchAndCommit(): Promise<{
+const getCurrentBranchAndCommit = async (): Promise<{
   branchName: string | null;
   commitHash: string | null;
-}> {
+}> => {
   const notFound = { branchName: null, commitHash: null };
   const gitExtension = extensions.getExtension<GitExtension>("vscode.git");
   if (!gitExtension || !gitExtension.isActive) {
@@ -97,7 +97,7 @@ export async function getCurrentBranchAndCommit(): Promise<{
     branchName: currentHead.name ?? null,
     commitHash: currentHead.commit ?? null,
   };
-}
+};
 
 const registerConfigureCommand = () => {
   return commands.registerCommand("soos-sca-scan.configure", async () => {
