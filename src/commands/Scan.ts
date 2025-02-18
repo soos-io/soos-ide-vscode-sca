@@ -41,10 +41,6 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
         try {
           const analysisService = AnalysisService.create(config.apiKey, config.apiURL);
 
-          let projectHash: string | undefined;
-          let branchHash: string | undefined;
-          let analysisId: string | undefined;
-
           progress.report({ increment: 25, message: "Creating scan..." });
 
           const result = await analysisService.setupScan({
@@ -64,10 +60,6 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             scanType,
           });
 
-          projectHash = result.projectHash;
-          branchHash = result.branchHash;
-          analysisId = result.analysisId;
-
           progress.report({
             increment: 25,
             message: "Locating manifests...",
@@ -75,7 +67,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
 
           const manifestsAndHashableFiles = await analysisService.findManifestsAndHashableFiles({
             clientId: config.clientId,
-            projectHash,
+            projectHash: result.projectHash,
             filesToExclude: config.filesToExclude,
             directoriesToExclude: config.directoriesToExclude,
             sourceCodePath,
@@ -113,10 +105,10 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
           if (errorMessage) {
             await analysisService.updateScanStatus({
               clientId: config.clientId,
-              projectHash,
-              branchHash,
+              projectHash: result.projectHash,
+              branchHash: result.branchHash,
               scanType,
-              analysisId: analysisId,
+              analysisId: result.analysisId,
               status: ScanStatus.Incomplete,
               message: errorMessage,
               scanStatusUrl: result.scanStatusUrl,
@@ -127,9 +119,9 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
 
           await analysisService.addManifestFilesToScan({
             clientId: config.clientId,
-            projectHash,
-            branchHash,
-            analysisId: analysisId,
+            projectHash: result.projectHash,
+            branchHash: result.branchHash,
+            analysisId: result.analysisId,
             scanType,
             scanStatusUrl: result.scanStatusUrl,
             manifestFiles: manifestFiles,
@@ -139,7 +131,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
 
           await analysisService.startScan({
             clientId: config.clientId,
-            projectHash,
+            projectHash: result.projectHash,
             analysisId: result.analysisId,
             scanType,
             scanUrl: result.scanUrl,
