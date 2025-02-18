@@ -1,7 +1,7 @@
 {
   "name": "soos-sca-scan",
   "displayName": "SOOS SCA Scan",
-  "description": "The SOOS SCA Scan Visual Studio Code Extension",
+  "description": "The SOOS SCA Scan Visual Studio Code Extension. Scan your code for vulnerabilities, license information, and more right from VSCode! Register for a free trial today at https://app.soos.io/register",
   "type": "commonjs",
   "icon": "SOOS.png",
   "publisher": "SOOS",
