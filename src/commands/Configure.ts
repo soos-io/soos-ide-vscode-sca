@@ -4,7 +4,7 @@ import { ensureEnumValue, ensureNonEmptyValue } from "@soos-io/api-client/dist/u
 import * as Path from "path";
 import { FileMatchTypeEnum, SOOS_CONSTANTS } from "@soos-io/api-client";
 
-export interface IAnalysisArguments {
+interface IAnalysisArguments {
   apiKey: string;
   clientId: string;
   projectName: string;
@@ -70,7 +70,7 @@ export const parseConfig = async (
   return null;
 };
 
-export const getCurrentBranchAndCommit = async (): Promise<{
+const getCurrentBranchAndCommit = async (): Promise<{
   branchName: string | null;
   commitHash: string | null;
 }> => {
