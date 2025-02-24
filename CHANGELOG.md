@@ -1,17 +1,5 @@
 # SOOS Visual Studio Code Extension for SCA Change Log
 
-## 0.1.x (Pre-Release)
+## 0.4.23
 
-Initial pre-release version.
-
-## 0.2.0 (Release)
-
-Initial release version.
-
-## 0.2.1 (Release)
-
-Update SOOS logo.
-
-## 0.2.3 (Release)
-
-Dependency updates.
+Latest version of the SOOS VSCode IDE integration. Run SOOS Core SCA scans from within Visual Studio Code. Register for a free trial at https://app.soos.io/register
