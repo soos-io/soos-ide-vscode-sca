@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "module": "CommonJS",
-    "target": "ES2024",
+    "lib": [
+      "ESNext"
+    ],
     "outDir": "out",
-    "lib": ["ES2024"],
     "sourceMap": true,
     "rootDir": "src",
     "removeComments": true /* Do not emit comments to output. */,
