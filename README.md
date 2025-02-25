@@ -2,7 +2,7 @@
 
 SOOS is an independent software security company, located in Winooski, VT USA, building security software for your team. [SOOS, Software security, simplified](https://soos.io).
 
-Use SOOS to scan your software for [vulnerabilities](https://app.soos.io/research/vulnerabilities) and [open source license](https://app.soos.io/research/licenses) issues with [SOOS Core SCA](https://soos.io/products/sca). [Generate and ingest SBOMs](https://soos.io/products/sbom-manager). [Export reports](https://kb.soos.io/help/soos-reports-for-export) to industry standards. Govern your open source dependencies. Run the [SOOS DAST vulnerability scanner](https://soos.io/products/dast) against your web apps or APIs. [Scan your Docker containers](https://soos.io/products/containers) for vulnerabilities. Check your source code for issues with [SAST Analysis](https://soos.io/products/sast).
+Use SOOS to scan your software for [vulnerabilities](https://app.soos.io/research/vulnerabilities) and [open source license](https://app.soos.io/research/licenses) issues with [SOOS Core SCA](https://soos.io/products/sca). [Generate and ingest SBOMs](https://soos.io/products/sbom-manager). [Export reports](https://kb.soos.io/project-exports-and-reports) to industry standards. Govern your open source dependencies. Run the [SOOS DAST vulnerability scanner](https://soos.io/products/dast) against your web apps or APIs. [Scan your Docker containers](https://soos.io/products/containers) for vulnerabilities. Check your source code for issues with [SAST Analysis](https://soos.io/products/sast).
 
 [Demo SOOS](https://app.soos.io/demo) or [Register for a Free Trial](https://app.soos.io/register).
 
@@ -14,23 +14,25 @@ If you maintain an Open Source project, sign up for the Free as in Beer [SOOS Co
 
 # Requirements
 
-- Having a valid account on SOOS. [Register for a Free Trial](https://app.soos.io/register)
+- You must have a valid SOOS account. [Register for a Free Trial](https://app.soos.io/register)
 
 # How to use it
 
-1. Configure the secrets using the `Configure SOOS SCA Secrets` command, it will ask you for your client and api key, that can be found on the [integrate page](https://app.soos.io/integrate/sca/)
+1. Configure the secrets using the `Configure SOOS SCA Secrets` command. You will be prompted for your client id and api key, which can both be found on the [integrate page](https://app.soos.io/integrate/sca/) within the SOOS app.
 
-![Configure secrets](./assets/Configure_Secrets.gif)
+![Configure secrets](./assets/configure_secrets.png)
 
-2. Configure Project Name and additional settings running the `Configure SOOS SCA Scan` command.
+2. Configure Project Name and additional settings using the `Configure SOOS SCA Scan` command.
 
-![Configure settings](./assets/Configure_Settings.gif)
+![Configure settings](./assets/configure_scan.png)
 
-3. Once settings are set up we can run it, in here we have two options, one will be to manually run the `Run SOOS SCA Scan` from the command palette or select the folder directly from the sidebar and click con `Run SOOS SCA Scan` from there.
+1. Once settings and secrets have been configured, you have two options to run a scan. You may either open the command palette and type `Run SOOS SCA Scan`, or select the folder directly from the sidebar and click on `Run SOOS SCA Scan`.
 
-![Perform scan from command](./assets/Perform_Scan_command.gif)
+## Run a Scan with the Command Palette
+![Perform scan from command palette](./assets/run_scan_command_palette.png)
 
-![Perform scan from menu](./assets/Perform_Scan_Menu.gif)
+## Run a Scan for a Folder
+![Perform scan from menu](./assets/run_scan.png)
 
 # Reference
 
