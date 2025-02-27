@@ -82,7 +82,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
 
           if (config.fileMatchType === FileMatchTypeEnum.Manifest && manifestFiles.length === 0) {
             errorMessage =
-              "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/help/error-no-valid-manifests-found";
+              "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-manifests-found";
           }
 
           if (
@@ -90,7 +90,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             soosHashesManifests.length === 0
           ) {
             errorMessage =
-              "No valid files to hash were found, cannot continue. For more help, please visit https://kb.soos.io/help/error-no-valid-files-to-hash-found";
+              "No valid files to hash were found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-files-to-hash-found";
           }
 
           if (
@@ -99,7 +99,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             manifestFiles.length === 0
           ) {
             errorMessage =
-              "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/help/error-no-valid-manifests-found and https://kb.soos.io/help/error-no-valid-files-to-hash-found";
+              "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-manifests-found and https://kb.soos.io/error-no-valid-files-to-hash-found";
           }
 
           if (errorMessage) {
