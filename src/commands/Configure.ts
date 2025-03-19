@@ -1,8 +1,9 @@
 import { SecretStorage, commands, extensions, window, workspace } from "vscode";
 import { GitExtension } from "../git";
-import { ensureEnumValue, ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
+import { ensureEnumValue } from "@soos-io/api-client/dist/utilities";
 import * as Path from "path";
 import { FileMatchTypeEnum, SOOS_CONSTANTS } from "@soos-io/api-client";
+import { ensureNonEmptyValue } from "../utilities";
 
 interface IAnalysisArguments {
   apiKey: string;
