@@ -1,5 +1,5 @@
-import { ensureNonEmptyValue } from "@soos-io/api-client/dist/utilities";
 import { SecretStorage, commands, window } from "vscode";
+import { ensureNonEmptyValue } from "../utilities";
 
 const registerConfigureSecretsCommand = (secretStorage: SecretStorage) => {
   return commands.registerCommand("soos-sca-scan.configureSecrets", async () => {
