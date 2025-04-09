@@ -10,9 +10,9 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.4.30",
+  "version": "0.4.31",
   "engines": {
-    "vscode": "^1.95.0"
+    "vscode": "^1.99.1"
   },
   "categories": [
     "Programming Languages",
@@ -173,7 +173,7 @@
     "esbuild": "^0.25.2",
     "eslint": "^9.24.0",
     "eslint-plugin-prettier": "^5.2.6",
-    "knip": "^5.47.0",
+    "knip": "^5.48.0",
     "mocha": "^11.1.0",
     "prettier": "^3.4.2",
     "sinon": "^19.0.2",
