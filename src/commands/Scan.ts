@@ -78,42 +78,37 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
           const manifestFiles = manifestsAndHashableFiles.manifestFiles ?? [];
           const soosHashesManifests = manifestsAndHashableFiles.hashManifests ?? [];
 
-          let errorMessage = null;
-
+          let noFilesMessage = null;
           if (config.fileMatchType === FileMatchTypeEnum.Manifest && manifestFiles.length === 0) {
-            errorMessage =
+            noFilesMessage =
               "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-manifests-found";
-          }
-
-          if (
+          } else if (
             config.fileMatchType === FileMatchTypeEnum.FileHash &&
             soosHashesManifests.length === 0
           ) {
-            errorMessage =
+            noFilesMessage =
               "No valid files to hash were found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-files-to-hash-found";
-          }
-
-          if (
+          } else if (
             config.fileMatchType === FileMatchTypeEnum.ManifestAndFileHash &&
             soosHashesManifests.length === 0 &&
             manifestFiles.length === 0
           ) {
-            errorMessage =
+            noFilesMessage =
               "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-manifests-found and https://kb.soos.io/error-no-valid-files-to-hash-found";
           }
 
-          if (errorMessage) {
+          if (noFilesMessage) {
             await analysisService.updateScanStatus({
               clientId: config.clientId,
               projectHash: result.projectHash,
               branchHash: result.branchHash,
               scanType,
               analysisId: result.analysisId,
-              status: ScanStatus.Incomplete,
-              message: errorMessage,
+              status: ScanStatus.NoFiles,
+              message: noFilesMessage,
               scanStatusUrl: result.scanStatusUrl,
             });
-            window.showErrorMessage(convertLinksInTextToMarkdown(errorMessage));
+            window.showErrorMessage(convertLinksInTextToMarkdown(noFilesMessage));
             return;
           }
 
@@ -127,7 +122,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             manifestFiles: manifestFiles,
           });
 
-          progress.report({ increment: 25, message: "Starting Scan..." });
+          progress.report({ increment: 25, message: "Running Scan..." });
 
           await analysisService.startScan({
             clientId: config.clientId,
