@@ -180,7 +180,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "1.4.0"
+    "@soos-io/api-client": "1.4.1"
   },
   "overrides": {
     "mocha": "^11.1.0"
