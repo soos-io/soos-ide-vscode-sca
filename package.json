@@ -10,7 +10,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.4.34",
+  "version": "0.4.35",
   "engines": {
     "vscode": "^1.99.1"
   },
@@ -167,7 +167,7 @@
     "@types/vscode": "^1.99.1",
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
-    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.1",
     "@vscode/vsce": "^3.3.2",
     "esbuild": "^0.25.2",
@@ -180,7 +180,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "1.5.0"
+    "@soos-io/api-client": "1.5.4"
   },
   "overrides": {
     "mocha": "^11.1.0"
