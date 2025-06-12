@@ -183,6 +183,8 @@
     "@soos-io/api-client": "1.5.5"
   },
   "overrides": {
+    "glob": "^11.0.2",
+    "brace-expansion": "2.0.1",
     "mocha": "^11.1.0"
   }
 }
