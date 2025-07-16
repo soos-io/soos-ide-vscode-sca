@@ -10,7 +10,7 @@
     "theme": "light"
   },
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
-  "version": "0.4.39",
+  "version": "0.4.40",
   "engines": {
     "vscode": "^1.99.1"
   },
@@ -138,7 +138,7 @@
     "setup:install": "npm install",
     "setup:clean-install": "npm ci",
     "setup:update": "npx npm-check -u",
-    "setup:clean": "npx rimraf node_modules && npx rimraf package-lock.json",
+    "setup:clean": "npx rimraf out && npx rimraf node_modules && npx rimraf package-lock.json",
     "esbuild-base": "npx rimraf out && esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
@@ -176,11 +176,11 @@
     "knip": "^5.48.0",
     "mocha": "^11.1.0",
     "prettier": "^3.4.2",
-    "sinon": "^19.0.2",
+    "sinon": "^21.0.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@soos-io/api-client": "1.6.2"
+    "@soos-io/api-client": "1.7.1"
   },
   "overrides": {
     "mocha": "^11.1.0"
