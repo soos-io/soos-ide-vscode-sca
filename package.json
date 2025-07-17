@@ -12,7 +12,7 @@
   "//": "NOTE: use major.EVEN_NUMBER.patch for release versions and major.ODD_NUMBER.patch for pre-release versions.",
   "version": "0.4.41",
   "engines": {
-    "vscode": "^1.99.1"
+    "vscode": "^1.102.1"
   },
   "categories": [
     "Programming Languages",
