@@ -1,10 +1,4 @@
-import {
-  FileMatchTypeEnum,
-  IntegrationName,
-  IntegrationType,
-  ScanStatus,
-  ScanType,
-} from "@soos-io/api-client";
+import { IntegrationName, IntegrationType, ScanType } from "@soos-io/api-client";
 import AnalysisService from "@soos-io/api-client/dist/services/AnalysisService";
 import { commands, Uri, workspace, window, ProgressLocation, SecretStorage } from "vscode";
 import { parseConfig } from "./Configure";
@@ -65,64 +59,37 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
             message: "Locating manifests...",
           });
 
-          const manifestsAndHashableFiles = await analysisService.findManifestsAndHashableFiles({
-            clientId: config.clientId,
-            projectHash: result.projectHash,
-            filesToExclude: config.filesToExclude,
-            directoriesToExclude: config.directoriesToExclude,
-            sourceCodePath,
-            packageManagers: config.packageManagers,
-            fileMatchType: config.fileMatchType,
-          });
+          const { manifestFiles, hashManifests } =
+            await analysisService.findManifestsAndHashableFiles({
+              clientId: config.clientId,
+              projectHash: result.projectHash,
+              filesToExclude: config.filesToExclude,
+              directoriesToExclude: config.directoriesToExclude,
+              sourceCodePath,
+              packageManagers: config.packageManagers,
+              fileMatchType: config.fileMatchType,
+            });
 
-          const manifestFiles = manifestsAndHashableFiles.manifestFiles ?? [];
-          const soosHashesManifests = manifestsAndHashableFiles.hashManifests ?? [];
-
-          let noFilesMessage = null;
-          if (config.fileMatchType === FileMatchTypeEnum.Manifest && manifestFiles.length === 0) {
-            noFilesMessage =
-              "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-manifests-found";
-          } else if (
-            config.fileMatchType === FileMatchTypeEnum.FileHash &&
-            soosHashesManifests.length === 0
-          ) {
-            noFilesMessage =
-              "No valid files to hash were found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-files-to-hash-found";
-          } else if (
-            config.fileMatchType === FileMatchTypeEnum.ManifestAndFileHash &&
-            soosHashesManifests.length === 0 &&
-            manifestFiles.length === 0
-          ) {
-            noFilesMessage =
-              "No valid files found, cannot continue. For more help, please visit https://kb.soos.io/error-no-valid-manifests-found and https://kb.soos.io/error-no-valid-files-to-hash-found";
-          }
-
-          if (noFilesMessage) {
-            await analysisService.updateScanStatus({
+          const { exitCode, errorMessage } =
+            await analysisService.addManifestsAndHashableFilesToScan({
               clientId: config.clientId,
               projectHash: result.projectHash,
               branchHash: result.branchHash,
-              scanType,
               analysisId: result.analysisId,
-              status: ScanStatus.NoFiles,
-              message: noFilesMessage,
+              scanType,
               scanStatusUrl: result.scanStatusUrl,
+              fileMatchType: config.fileMatchType,
+              manifestFiles,
+              hashManifests,
             });
-            window.showErrorMessage(convertLinksInTextToMarkdown(noFilesMessage));
+          if (exitCode !== 0) {
+            window.showErrorMessage(
+              convertLinksInTextToMarkdown(errorMessage ?? "An error occurred."),
+            );
             return;
           }
 
-          await analysisService.addManifestFilesToScan({
-            clientId: config.clientId,
-            projectHash: result.projectHash,
-            branchHash: result.branchHash,
-            analysisId: result.analysisId,
-            scanType,
-            scanStatusUrl: result.scanStatusUrl,
-            manifestFiles: manifestFiles,
-          });
-
-          progress.report({ increment: 25, message: "Running Scan..." });
+          progress.report({ increment: 25, message: "Running Scan - this may take a minute..." });
 
           await analysisService.startScan({
             clientId: config.clientId,
@@ -140,7 +107,7 @@ const registerScanCommand = (secretStorage: SecretStorage) => {
 
           progress.report({
             increment: 25,
-            message: `Scan finished.`,
+            message: "Scan finished!",
           });
 
           const scanStatus = await analysisService.analysisApiClient.getScanStatus({
