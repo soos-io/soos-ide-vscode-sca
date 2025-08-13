@@ -21,8 +21,5 @@
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "resolveJsonModule": true,
     "moduleResolution": "node"
-  },
-  "exclude": [
-    ".vscode-test"
-  ]
+  }
 }

@@ -11,7 +11,7 @@ const convertLinksInTextToMarkdown = (text: string): string => {
 };
 
 const registerScanCommand = (secretStorage: SecretStorage) => {
-  return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri) => {
+  return commands.registerCommand("soos-sca-scan.scan", async (uri: Uri | undefined) => {
     const scanType = ScanType.SCA;
     const sourceCodePath = uri?.fsPath ?? workspace.workspaceFolders?.at(0)?.uri.fsPath;
     if (sourceCodePath === undefined) {
