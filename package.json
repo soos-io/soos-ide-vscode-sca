@@ -163,7 +163,7 @@
     "patch-api-client": "npm run patch && npm run setup:clean && npm install @soos-io/api-client@latest --save-exact && npm install && npm run check"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
+    "@types/node": "^24.10.1",
     "@types/sinon": "^17.0.3",
     "@types/vscode": "^1.99.1",
     "@typescript-eslint/eslint-plugin": "^8.29.1",
