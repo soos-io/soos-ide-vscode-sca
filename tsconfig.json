@@ -20,6 +20,9 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "resolveJsonModule": true,
-    "moduleResolution": "node"
+    "types": [
+      "node",
+      "mocha"
+    ],
   }
 }
